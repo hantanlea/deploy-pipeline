@@ -1,0 +1,15 @@
+{
+  "$schema": "https://schema.railpack.com",
+  "packages": {
+    "node": "20"
+  },
+  "steps": {
+    "build-frontend": {
+      "inputs": [{ "step": "packages:mise" }],
+      "commands": [
+        { "cmd": "cd frontend && npm ci && npm run build" }
+      ],
+      "deployOutputs": ["frontend/dist"]
+    }
+  }
+}
