@@ -5,7 +5,10 @@
   },
   "steps": {
     "build-frontend": {
-      "inputs": [{ "step": "packages:mise" }],
+      "inputs": [
+        { "step": "packages:mise" },
+        { "local": true, "include": ["."] }
+      ],
       "commands": [
         { "cmd": "npm --prefix frontend ci" },
         { "cmd": "npm --prefix frontend run build" }
