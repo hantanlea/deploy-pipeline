@@ -9,7 +9,7 @@
       "commands": [
         { "cmd": "cd frontend && npm ci && npm run build" }
       ],
-      "deployOutputs": ["frontend/dist"]
+      "deployOutputs": [{ "include": ["frontend/dist"] }]
     }
   }
 }
