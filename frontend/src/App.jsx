@@ -15,7 +15,7 @@ const projects = [
   },
   {
     id: "03",
-    designation: "VAPORLOCK",
+    designation: "DRIFTWAKE",
     description: "Throttles write amplification through an adaptive backpressure valve.",
     Icon: FlaskConical,
   },
