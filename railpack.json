@@ -7,7 +7,8 @@
     "build-frontend": {
       "inputs": [{ "step": "packages:mise" }],
       "commands": [
-        { "cmd": "cd frontend && npm ci && npm run build" }
+        { "cmd": "npm --prefix frontend ci" },
+        { "cmd": "npm --prefix frontend run build" }
       ],
       "deployOutputs": [{ "include": ["frontend/dist"] }]
     }
