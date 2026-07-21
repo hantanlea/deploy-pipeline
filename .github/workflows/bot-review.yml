@@ -32,14 +32,16 @@ jobs:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           show_full_output: true
           prompt: |
-            Review this pull request as a skeptical senior engineer.
-            Use `gh pr diff` to see the changes and `gh pr view` for context.
-            Check correctness, edge cases, and whether it matches this
-            repo's conventions in docs/git-workflow.md.
+            Review pull request #${{ github.event.issue.number }} as a
+            skeptical senior engineer.
+            Use `gh pr diff ${{ github.event.issue.number }}` to see the
+            changes and `gh pr view ${{ github.event.issue.number }}` for
+            context. Check correctness, edge cases, and whether it matches
+            this repo's conventions in docs/git-workflow.md.
 
             If the PR is genuinely good, approve it:
-              gh pr review --approve --body "<your reasoning>"
+              gh pr review ${{ github.event.issue.number }} --approve --body "<your reasoning>"
 
             If it's not ready, request changes instead:
-              gh pr review --request-changes --body "<specific feedback>"
+              gh pr review ${{ github.event.issue.number }} --request-changes --body "<specific feedback>"
           claude_args: '--model claude-sonnet-5 --allowedTools "Bash(gh pr diff:*),Bash(gh pr view:*),Bash(gh pr review:*),Bash(cat:*),Read"'
