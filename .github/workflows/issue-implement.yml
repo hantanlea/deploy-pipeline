@@ -53,4 +53,4 @@ jobs:
             separate step. If the issue is unclear or underspecified, post
             a comment on the issue explaining what's blocking you instead
             of guessing.
-          claude_args: '--model claude-sonnet-5 --allowedTools "Read,Write,Edit,Glob,Grep,Bash(git checkout:*),Bash(git add:*),Bash(git commit:*),Bash(git push:*),Bash(gh issue view:*),Bash(gh issue comment:*),Bash(gh pr create:*),Bash(uv sync:*),Bash(uv run pytest:*),Bash(npm ci:*),Bash(npm run build:*),Bash(npm test:*)"'
+          claude_args: '--model claude-sonnet-5 --allowedTools "Read,Write,Edit,Glob,Grep,Bash(git status:*),Bash(git diff:*),Bash(git checkout:*),Bash(git add:*),Bash(git commit:*),Bash(git push:*),Bash(gh issue view:*),Bash(gh issue comment:*),Bash(gh pr create:*),Bash(uv sync:*),Bash(uv run pytest:*),Bash(npm ci:*),Bash(npm run build:*),Bash(npm run lint:*)"'
