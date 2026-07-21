@@ -12,4 +12,3 @@ wheels/
 # Local tooling
 .claude/
 .pytest_cache/
-.bot-token
