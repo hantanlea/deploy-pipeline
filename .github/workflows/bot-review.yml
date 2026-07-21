@@ -8,7 +8,8 @@ jobs:
   bot-review:
     if: >
       github.event.issue.pull_request &&
-      contains(github.event.comment.body, '@clavius review')
+      contains(github.event.comment.body, '@clavius review') &&
+      contains(fromJSON('["hantanlea", "TheBountyBear"]'), github.event.comment.user.login)
     runs-on: ubuntu-latest
 
     steps:
