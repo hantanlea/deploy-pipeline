@@ -3,6 +3,6 @@ The frontend lives in `frontend/` (Vite + React + Tailwind). It's built separate
 
 ## Git workflow
 - Never push directly to `main`.
-- Always work on the `dev` branch. Commit and push there without asking permission per commit.
-- When a change is ready, open a PR from `dev` into `main` with `gh pr create`.
+- Create a new branch for every task — see `docs/git-workflow.md` for naming and commit conventions.
+- Open a PR with `gh pr create` when the change is ready.
 - Never merge the PR — leave that for the user.
