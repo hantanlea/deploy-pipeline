@@ -41,4 +41,4 @@ jobs:
 
             If it's not ready, request changes instead:
               gh pr review --request-changes --body "<specific feedback>"
-          claude_args: '--model claude-sonnet-5 --allowedTools "Bash(gh pr diff:*),Bash(gh pr view:*),Bash(gh pr review:*),Bash(cat:*)"'
+          claude_args: '--model claude-sonnet-5 --allowedTools "Bash(gh pr diff:*),Bash(gh pr view:*),Bash(gh pr review:*),Bash(cat:*),Read"'
