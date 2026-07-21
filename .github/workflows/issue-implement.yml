@@ -1,0 +1,56 @@
+name: Issue Implementer
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  implement:
+    if: >
+      !github.event.issue.pull_request &&
+      contains(github.event.comment.body, '@bernini implement') &&
+      contains(fromJSON('["hantanlea", "TheBountyBear"]'), github.event.comment.user.login)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Generate implementer bot token
+        id: implementer-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.BERNINI_APP_ID }}
+          private-key: ${{ secrets.BERNINI_APP_PRIVATE_KEY }}
+
+      - name: Check out repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ steps.implementer-token.outputs.token }}
+
+      - name: Claude implements the issue
+        uses: anthropics/claude-code-action@v1
+        env:
+          GH_TOKEN: ${{ steps.implementer-token.outputs.token }}
+        with:
+          github_token: ${{ steps.implementer-token.outputs.token }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          show_full_output: true
+          prompt: |
+            Implement a fix or feature for issue
+            #${{ github.event.issue.number }}.
+
+            Use `gh issue view ${{ github.event.issue.number }}` to read the
+            issue. Follow this repo's conventions in docs/git-workflow.md:
+            create a new branch (type/short-description), make focused
+            commits in Conventional Commits style, and never push directly
+            to main.
+
+            When the change is ready:
+              git push -u origin <branch-name>
+              gh pr create --title "<type>: <summary>" --body "Closes #${{ github.event.issue.number }}
+
+              <description of what changed and why>"
+
+            Do not review, approve, or merge the PR yourself — that's a
+            separate step. If the issue is unclear or underspecified, post
+            a comment on the issue explaining what's blocking you instead
+            of guessing.
+          claude_args: '--model claude-sonnet-5 --allowedTools "Read,Write,Edit,Glob,Grep,Bash(git *),Bash(gh issue view:*),Bash(gh issue comment:*),Bash(gh pr create:*),Bash(uv *),Bash(npm *)"'
