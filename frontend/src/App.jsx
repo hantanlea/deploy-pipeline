@@ -16,7 +16,7 @@ const projects = [
   {
     id: "03",
     designation: "DRIFTWAKE",
-    description: "Throttles write amplification through an adaptive backpressure valve.",
+    description: "Throttles ego amplification through an adaptive backpressure valve.",
     Icon: FlaskConical,
   },
 ];
