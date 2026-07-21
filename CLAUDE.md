@@ -6,3 +6,4 @@ The frontend lives in `frontend/` (Vite + React + Tailwind). It's built separate
 - Create a new branch for every task — see `docs/git-workflow.md` for naming and commit conventions.
 - Open a PR with `gh pr create` when the change is ready.
 - Never merge the PR — leave that for the user.
+- To have a PR auto-reviewed and merged by the bot instead, see the "Pull Requests" section of `docs/git-workflow.md`.

@@ -17,3 +17,5 @@
 - Open with `gh pr create --fill` once a change is ready.
 - PR title should follow the same `<type>: <summary>` convention as commits.
 - Squash merge is the default merge strategy.
+- To have the PR auto-reviewed and merged, arm auto-merge (`gh pr merge --auto --squash`) and comment `@clavius review` on it. The bot (`agent-clavius[bot]`) reviews the diff and either approves — which lets auto-merge complete — or requests changes with specific feedback. Only comments from `hantanlea` or `TheBountyBear` trigger it.
+
