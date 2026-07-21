@@ -1,0 +1,43 @@
+name: Bot Review
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  bot-review:
+    if: >
+      github.event.issue.pull_request &&
+      contains(github.event.comment.body, '@clavius review') &&
+      contains(fromJSON('["hantanlea", "TheBountyBear"]'), github.event.comment.user.login)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Generate reviewer bot token
+        id: reviewer-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.REVIEWER_APP_ID }}
+          private-key: ${{ secrets.REVIEWER_APP_PRIVATE_KEY }}
+
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Claude reviews the PR
+        uses: anthropics/claude-code-action@v1
+        env:
+          GH_TOKEN: ${{ steps.reviewer-token.outputs.token }}
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Review this pull request as a skeptical senior engineer.
+            Use `gh pr diff` to see the changes and `gh pr view` for context.
+            Check correctness, edge cases, and whether it matches this
+            repo's conventions in docs/git-workflow.md.
+
+            If the PR is genuinely good, approve it:
+              gh pr review --approve --body "<your reasoning>"
+
+            If it's not ready, request changes instead:
+              gh pr review --request-changes --body "<specific feedback>"
+          claude_args: '--allowedTools "Bash(gh pr diff:*),Bash(gh pr view:*),Bash(gh pr review:*)"'
